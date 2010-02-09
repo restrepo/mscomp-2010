@@ -23,7 +23,9 @@ def trapz(x, y):
         raise ValueError('x and y must have > 1 element')
 
     # Efficient application of trapezoid rule via numpy
-    return 0.5*((x[1:]-x[:-1])*(y[1:]+y[:-1])).sum()
+    #return 0.5*((x[1:]-x[:-1])*(y[1:]+y[:-1])).sum()
+    return 0.5*sum((x[1:]-x[:-1])*(y[1:]+y[:-1]))
+    #return 0.5* np.dot((x[1:]-x[:-1]), (y[1:]+y[:-1]))
 
 def trapzf(f,a,b,npts=100):
     """Simple trapezoid-based integrator.
