@@ -183,7 +183,7 @@ if __name__ == '__main__':
     xs = np.linspace(0,3,400)
     xl = np.linspace(0,35,400)
     # Make figures
-    show_asymptotic_large([0, 1, 5], xl)
+    show_asymptotic_large([0, 1, 5, 6, 7], xl)
     show_asymptotic_small([4, 5, 6], xs)
     show_recursion_rel(5, xl)
     # Don't forget a show() call at the end of the script
