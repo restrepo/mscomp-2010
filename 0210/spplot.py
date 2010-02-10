@@ -17,6 +17,8 @@ def fplot(func, xgrid=(0, 10, 200), ax=None):
 
 
 if __name__ == '__main__':
+    import sys
+    print 'ARGV:', sys.argv
     fig = plt.figure()
     zcolors = ['red', 'green']
     s = special
