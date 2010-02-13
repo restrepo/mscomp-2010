@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\noindent{}\hrulefill{}
+\begin{flushright}
+  \textbf{\large{Problem set \#5}}
+\end{flushright}
+\tableofcontents{}
+\noindent{}\hrulefill{}
+\section{Polinomios}
+En los test de $\chi^2$ suelen surgir ecuaciones del tipo
+\begin{align}
+  x^2\sum_{i=1}^n\frac{1}{x+r_i}=k\,.
+\end{align}
+Dicha ecuaci\'on se puede escribir como una ecuaci\'on polin\'omica para $x>0$ y $r_i>0$. Utilice la clase de polinomios de Numpy, \texttt{np.poly1d} para establecer la ecuaci\'on polin\'omica equivalente:
+\begin{align}
+  x^2P(x)=k Q(x)
+\end{align}
+donde
+\begin{align}
+  Q(x)=\prod_{i=1}^n(x+r_i)\,,
+\end{align}
+y
+\begin{align}
+  P(x)=\sum_{i=1}^n\prod_{j\neq i}(x+r_j)
+\end{align}
+para finalmente construir la ecuaci\'on polin\'omica
+\begin{align}
+  R(x)= x^2P(x)-k Q(x)=0\,.
+\end{align}
+Tenga en cuenta que Numpy puede sumar, multiplicar, integrar, etc polinomios, pero no puede dividirlos. Note que los polinomios en Numpy se pueden generar a partir de los coeficientes o las ra\'\i ces. Y finalmente, que  los polinomios de Numpy, \texttt{P}, tienen un atributo \texttt{P.r} que entrega las ra\'\i ces.  
+
+\end{document}
