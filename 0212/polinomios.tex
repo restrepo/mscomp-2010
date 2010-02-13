@@ -11,9 +11,10 @@
 \section{Polinomios}
 En los test de $\chi^2$ suelen surgir ecuaciones del tipo
 \begin{align}
+\label{eq:1}
   x^2\sum_{i=1}^n\frac{1}{x+r_i}=k\,.
 \end{align}
-Dicha ecuaci\'on se puede escribir como una ecuaci\'on polin\'omica para $x>0$ y $r_i>0$. Utilice la clase de polinomios de Numpy, \texttt{np.poly1d} para establecer la ecuaci\'on polin\'omica equivalente:
+Dicha ecuaci\'on se puede escribir como una ecuaci\'on polin\'omica para $x>0$ y $r_i>0$. de manera que pueda utilizarse la clase de polinomios de Numpy, \texttt{np.poly1d}. La ec.~(\ref{eq:1}), puede reescribirse como la ecuaci\'on polin\'omica equivalente:
 \begin{align}
   x^2P(x)=k Q(x)
 \end{align}
@@ -23,7 +24,7 @@ donde
 \end{align}
 y
 \begin{align}
-  P(x)=\sum_{i=1}^n\prod_{j\neq i}(x+r_j)
+  P(x)=\sum_{i=1}^n\prod_{j\neq i}(x+r_j)\,;
 \end{align}
 para finalmente construir la ecuaci\'on polin\'omica
 \begin{align}
