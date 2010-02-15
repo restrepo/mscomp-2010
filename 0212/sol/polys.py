@@ -4,7 +4,7 @@ import numpy as np
 
 def prod(seq):
     """Multiply the elements of a sequence."""
-    return reduce(lambda x,y: x*y, seq)
+    return reduce(lambda x,y: x*y, seq, 1)
 
 a = np.array([3.4, 4.5])
 b = np.array([2.1, 5.5])
