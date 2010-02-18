@@ -8,12 +8,13 @@ def share_axes(fig, nrows, ncols, to_share, idx, **subplot_kw):
 
     XXX - rest of docstring missing, ran out of time for now."""
     
+    # Valid indices for axes start at 1, since fig is at 0: 
+    indices = range(1, nrows*ncols+1)
+    # idx will be created first, manually, so remove from this list
+    indices.remove(idx)
     # Must make axes as dict so we can point all others to shared one
     axd = {}
     axd[idx] = fig.add_subplot(nrows, ncols, idx, **subplot_kw)
-    # Valid indices for axes start at 1, since fig is at 0: 
-    indices = set(range(1, nrows*ncols+1))
-    indices.remove(idx)
     # Pass necessary share kw
     subplot_kw[to_share] = axd[idx]
     for i in indices:
