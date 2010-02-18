@@ -4,20 +4,22 @@ import matplotlib.pyplot as plt
 
 
 def share_axes(fig, nrows, ncols, to_share, idx, **subplot_kw):
-    """Turn on axis sharing for the given list of figure and axes"""
+    """Turn on axis sharing for the given list of figure and axes.
+
+    XXX - rest of docstring missing, ran out of time for now."""
+    
     # Must make axes as dict so we can point all others to shared one
     axd = {}
     axd[idx] = fig.add_subplot(nrows, ncols, idx, **subplot_kw)
     # Valid indices for axes start at 1, since fig is at 0: 
     indices = set(range(1, nrows*ncols+1))
     indices.remove(idx)
+    # Pass necessary share kw
     subplot_kw[to_share] = axd[idx]
     for i in indices:
         axd[i] = fig.add_subplot(nrows, ncols, i, **subplot_kw)
-    # Now, we need axes to be an ordered list:
-    axes = [axd[i] for i in sorted(axd.keys())]
-
-    return axes
+    # Now, we need the returned axes to be an ordered list:
+    return [axd[i] for i in sorted(axd.keys())]
 
 
 def fig_subplot(subplots=(1,1), sharex=None, sharey=None, subplot_kw=None,
@@ -87,16 +89,14 @@ def fig_subplot(subplots=(1,1), sharex=None, sharey=None, subplot_kw=None,
         
     fig = plt.figure(**fig_kw)
     nrows, ncols = subplots
-    ax_idx = range(1, nrows*ncols+1)
 
     if sharex:
         axes = share_axes(fig, nrows, ncols, 'sharex', sharex, **subplot_kw)
     elif sharey:
         axes = share_axes(fig, nrows, ncols, 'sharey', sharey, **subplot_kw)
-        #raise NotImplementedError('sharey not ready yet')
     else:
         axes = [ fig.add_subplot(nrows, ncols, i, **subplot_kw)
-                 for i in ax_idx ]
+                 for i in range(1, nrows*ncols+1) ]
     return [fig] + axes
 
 
