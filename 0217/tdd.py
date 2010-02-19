@@ -18,7 +18,7 @@ def test_f():
 
 def test_failing():
     x = 5
-    x2 = 24
+    x2 = 25
     nt.assert_equals(f(x), x2)
 
 
