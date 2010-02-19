@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The least action principle &mdash; Taller Curso MSComp v0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Taller Curso MSComp v0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tmp/least_action.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-least-action-principle">
+<span id="min-action"></span><h1>The least action principle<a class="headerlink" href="#the-least-action-principle" title="Permalink to this headline">¶</a></h1>
+<p>From: <a class="reference external" href="http://www.eftaylor.com/software/ActionApplets/LeastAction.html">http://www.eftaylor.com/software/ActionApplets/LeastAction.html</a> (With Java applets)</p>
+<p>Java source code at: <a class="reference external" href="http://www.eftaylor.com/leastaction.html">http://www.eftaylor.com/leastaction.html</a></p>
+<p>Throw an apple vertically upward from the ground (zero height). We demand that 3 seconds later the apple return to our hand at the same height (zero) from which we launched it. What is the motion of this apple between the events of launch and catch? At what height can the apple be found at any given time? Or to express the question more technically: What is the worldline of the apple between launch and catch? We use the principle of least action to find answers to these questions.</p>
+<div class="math">
+<p><img src="../_images/math/e5f1e84583632169ba650a4056f4a461cac29954.png" alt="S\equiv \int_{\hbox{entire worldline}} L\,d t=
+\int_{\hbox{entire worldline}} (T-V)\,d t" /></p>
+</div><p>The principle of least action defines the action <img class="math" src="../_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S"/> for motion along a worldline between two fixed events:</p>
+<p>Here <img class="math" src="../_images/math/859ccf4cd60c7bc6b8fa1afc9a42dc811a826d6f.png" alt="L"/> is called the Lagrangian. In simple cases the Lagrangian is equal to the difference between the kinetic energy <img class="math" src="../_images/math/2554b6496c3b678897e9b060ef00aa9f0a7d7ece.png" alt="T"/> and the potential energy <img class="math" src="../_images/math/12d58aa29201da09d8e620f8698e3a37547f6b4a.png" alt="V"/>, that is, <img class="math" src="../_images/math/db6e5106f262d5fe3ad6ad8a9fd0265db14e1dd7.png" alt="L = T – V"/>. In this interactive document we will approximate a continuous worldline with a worldline made of straight connected segments. The computer then multiplies the value of <img class="math" src="../_images/math/0af35e26e02b8509792ef0e6c2c58c518546fe5a.png" alt="(T – V)"/> on each segment by the time lapse <img class="math" src="../_images/math/e0d2bf360290fd61d1c1557e763f2622363b3d35.png" alt="t"/> for that segment and adds up the result for all segments, giving us an approximate value for the action <img class="math" src="../_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S"/> along the entire worldline. Our task is then to move the connected segments of the worldline so that they result in the minimum total value of the action <img class="math" src="../_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S"/>.</p>
+<p>In the following we assume a mass of 0.2 kilogram for the apple.</p>
+<p>Try to obtain a plot similar to the obtained in &#8220;Display #2: Automatic hunting for worldline of least action&#8221;, when the button <tt class="docutils literal"><span class="pre">Hunt</span></tt> is clicked:</p>
+<div class="figure">
+<img alt="tmp/fig/leastaction.png" src="tmp/fig/leastaction.png" />
+</div>
+<p>Further reference: <a class="reference external" href="http://www.eftaylor.com/pub/Symmetries&amp;ConsLaws.pdf">http://www.eftaylor.com/pub/Symmetries&amp;ConsLaws.pdf</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Juan Carlos Cardona, Fernando Pérez, Diego Restrepo y Jorge Iván Zuluaga.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

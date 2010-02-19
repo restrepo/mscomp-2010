@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Trapezoidal rule &mdash; Taller Curso MSComp v0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Taller Curso MSComp v0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tmp/trapezoid.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="trapezoidal-rule">
+<span id="trapezoid"></span><h1>Trapezoidal rule<a class="headerlink" href="#trapezoidal-rule" title="Permalink to this headline">¶</a></h1>
+<p><strong>Illustrates</strong>: basic array slicing, functions as first class objects.</p>
+<p>In this exercise, you are tasked with implementing the simple trapezoid rule
+formula for numerical integration. If we want to compute the definite integral</p>
+<div class="math" id="equation-trapzf">
+<p><span class="eqno">(1)</span><img src="../_images/math/f7350895a54100f3b9e1811e8f1a9667fcf8cd88.png" alt="\int_{a}^{b}f(x)dx" /></p>
+</div><p>we can partition the integration interval <img class="math" src="../_images/math/8ecbd1ba3da8f2adef66a63f2ab32c47e63fa734.png" alt="[a,b]"/> into smaller subintervals,
+and approximate the area under the curve for each subinterval by the area of
+the trapezoid created by linearly interpolating between the two function values
+at each end of the subinterval. This is graphically illustrated in the Figure
+below, where the blue line represents the function <img class="math" src="../_images/math/c96dd6ec1dc4ad7520fbdc78fcdbec9edd068d0c.png" alt="f(x)"/> and the red line
+represents the successive linear segments.  The area under <img class="math" src="../_images/math/c96dd6ec1dc4ad7520fbdc78fcdbec9edd068d0c.png" alt="f(x)"/> (the value of
+the definite integral) can thus be approximated as the sum of the areas of all
+these trapezoids. If we denote by <img class="math" src="../_images/math/837682bc6103a4c6740c8273434e1a2c771a2514.png" alt="x_{i}"/> (<img class="math" src="../_images/math/182c5c631aa4710eba0639dbea6a5660e18e49a0.png" alt="i=0,\ldots,n,"/> with <img class="math" src="../_images/math/0f6189dd4bbf816acd04dc250966a9edad6e427b.png" alt="x_{0}=a"/> and
+<img class="math" src="../_images/math/2efa8b10ef74b9f0608a926b079263fd0e4d6f29.png" alt="x_{n}=b"/>) the abscissas where the function is sampled, then</p>
+<div class="math">
+<p><img src="../_images/math/3f60b150551e62df85b2226c451ee7eeec3656cd.png" alt="\int_{a}^{b}f(x)dx\approx\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-x_{i-1}\right)\left(f(x_{i})+f(x_{i-1})\right)." /></p>
+</div><p>The common case of using equally spaced abscissas with spacing <img class="math" src="../_images/math/3975da8d93cf1b5059e287aadddcc5d71ac2c94c.png" alt="h=(b-a)/n"/>
+reads simply</p>
+<div class="math" id="equation-trapzf2">
+<p><span class="eqno">(2)</span><img src="../_images/math/b50b9a85ef89fb5d750e4e42b63450205db59ae7.png" alt="\int_{a}^{b}f(x)dx\approx\frac{h}{2}\sum_{i=1}^{n}\left(f(x_{i})+f(x_{i-1})\right)." /></p>
+</div><p>One frequently receives the function values already precomputed, <img class="math" src="../_images/math/0b12df551bdbc5edab109fb3c667ea812c4eabec.png" alt="y_{i}=f(x_{i}),"/>
+so equation <a href="#equation-trapzf">(1)</a> becomes</p>
+<div class="math" id="equation-trapz">
+<p><span class="eqno">(3)</span><img src="../_images/math/66d4b684b6da0ad68b9be47400a157a6c490b840.png" alt="\int_{a}^{b}f(x)dx\approx\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-x_{i-1}\right)\left(y_{i}+y_{i-1}\right)." /></p>
+</div><div class="figure">
+<img alt="tmp/fig/trapezoid_rule.png" src="tmp/fig/trapezoid_rule.png" style="width: 4in;" />
+<p class="caption">Illustration of the composite trapezoidal rule with a non-uniform grid
+(Image credit: Wikipedia).</p>
+</div>
+<p>In this exercise, you&#8217;ll need to write two functions, <tt class="docutils literal"><span class="pre">trapz</span></tt> and
+<tt class="docutils literal"><span class="pre">trapzf</span></tt>. <tt class="docutils literal"><span class="pre">trapz</span></tt> applies the trapezoid formula to pre-computed values,
+implementing equation <a href="#equation-trapz">(3)</a>, while <tt class="docutils literal"><span class="pre">trapzf</span></tt> takes a function <img class="math" src="../_images/math/bb2c93730dbb48558bb3c4738c956c4e8f816437.png" alt="f"/> as
+input, as well as the total number of samples to evaluate, and computes
+eq. <a href="#equation-trapzf2">(2)</a>.</p>
+<p>Test it and show that it produces correct values for some simple integrals you
+can compute analytically.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Juan Carlos Cardona, Fernando Pérez, Diego Restrepo y Jorge Iván Zuluaga.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

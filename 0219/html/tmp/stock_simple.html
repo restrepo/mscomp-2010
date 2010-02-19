@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Simple Stock Analysis &mdash; Taller Curso MSComp v0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Taller Curso MSComp v0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tmp/stock_simple.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="simple-stock-analysis">
+<h1>Simple Stock Analysis<a class="headerlink" href="#simple-stock-analysis" title="Permalink to this headline">¶</a></h1>
+<p>In class we did the following exercise:</p>
+<ul class="simple">
+<li>load <tt class="docutils literal"><span class="pre">crox.csv</span></tt>.  Look at its dtype.  Those fields are accessible as
+attribues of the loaded object from <tt class="docutils literal"><span class="pre">mlab.csv2rec</span></tt>.</li>
+<li>sort it</li>
+<li>plot the adj_close vs date (closing share price adjusted for splits vs date).</li>
+<li>The daily traded volume is the product of the volume (# shares) times the
+close (price per share).  Find the mean volume, the max volume and the day
+when the max occured.</li>
+<li>Plot the daily volume vs date. Then, overlay red dots on the days when the
+volume was in the upper 50% range (&gt; than 0.5 of the max).</li>
+</ul>
+<p>For that we used this code (OK for pasting into IPython):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">csv2rec</span> <span class="p">(</span><span class="s">&#39;crox.csv&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">adj_close</span><span class="p">)</span>
+<span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+<span class="n">draw</span><span class="p">()</span>
+<span class="n">dv</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">volume</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">close</span>
+<span class="n">dv</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">dv</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">dv</span><span class="o">.</span><span class="n">argmax</span> <span class="p">()</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">dv</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dv</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">figure</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">dv</span><span class="p">)</span>
+<span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+<span class="n">draw</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gca</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">dv</span><span class="p">)</span>
+<span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">dv</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now, modify this code to have both plots on a single plot that share the x axis
+(i.e., so that zooming in one plot zooms the other on the x axis). Add the
+markers for high-volume days to both plots and make the filename and threshold
+(in this case 50%) parameters so they can be easily changed.</p>
+<p>Also print the dates (the actual date, not the index) when the min/max trading
+volumes occurred.</p>
+<p>You should obtain a printout similar to:</p>
+<div class="highlight-python"><pre>In [3]: run stock_simple.py
+Min volume: :math:`  0.560 Million, on 2008-12-24
+Max volume: `   2887 Million, on 2007-11-01</pre>
+</div>
+<p>and figure like this (already zoomed to the high-volume days):</p>
+<div class="figure">
+<img alt="tmp/fig/stock_simple_zoomed.png" src="tmp/fig/stock_simple_zoomed.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Juan Carlos Cardona, Fernando Pérez, Diego Restrepo y Jorge Iván Zuluaga.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

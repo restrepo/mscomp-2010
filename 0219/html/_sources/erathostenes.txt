@@ -1,0 +1,33 @@
+.. F Perez
+
+.. _erathostenes:
+
+Prime numbers and the sieve of Erathostenes
+===========================================
+
+**Level**: Basic (language,basic libraries)
+
+The sieve of Erathostenes is a simple and famous algorithm for
+factoring prime numbers.  You will find a nice explanation of the
+algorithm in Wikipedia_.
+
+Try to implement it in Python, and think of different data structures
+you may use to do this.
+
+Time the various implementations, do some analysis of the run times of
+each.
+
+.. _Wikipedia: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+
+.. only:: instructor
+
+   Solution
+   --------
+
+   .. literalinclude:: sol/erathostenes.py
+   
+   After calling ``time_sieves()``, we can see how much impact different data
+   structure choices can have on algorithm run time:
+
+   .. figure:: fig/erathostenes_timings.png
+      :width: 4in

@@ -1,0 +1,33 @@
+.. MSComp documentation master file, created by
+   sphinx-quickstart on Mon Feb 15 16:50:53 2010.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Modern scientific computing - problem set
+=========================================
+
+We present below a list of selected problems intended to challenge the
+skills of Scientific Python Programmers.  Problems are sorted
+according to their level of complexity and the increasing number of
+required skills needed to solve them.  
+
+Try to solve first the simpler problems and go next through the more
+complex ones.
+
+.. toctree::
+   :maxdepth: 2
+
+   erathostenes
+   fitting
+   monte_carlo
+   cell_autom
+   pattern_search
+   tree_methods
+   love_game
+   fractals
+   pycalc
+   least_action
+
+In addition to the problems listed here, you should study the Scipy Cookbook
+(http://www.scipy.org/Cookbook), where a lot of very good problems are
+presented with full solutions.

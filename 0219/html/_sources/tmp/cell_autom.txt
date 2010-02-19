@@ -1,0 +1,37 @@
+.. J Zuluaga
+
+.. _cell_automata:
+
+Cellular automata
+=================
+
+Compute the evolution of a 2D Cellular Automaton (CA) given a random
+initial state, a simple set of cell update rules and a given boundary
+condition.
+
+As an example create one of the most famous CA, The Life Game:
+
+1. Generate a 2D matrix of integer values between 0 and 3 (0: dead
+   cell, 1: recently born, 2: alive, 3: recently dead.)
+
+2. Update the state of each cell using the following conditions:
+   
+   1. If a cell is dead but there are exactly 3 neighbor cells alive,
+   she will born (passes from state 0 to state 1)
+   
+   2. If a cell is alive and there are 2 or 3 neighbor cells alive she
+   stays alive (passes from state 1 to 2 or stays in state 2),
+   otherwise it dies (passes from state 2 to 3).
+
+3. Use a *cold* boundary condition, i.e. all the cells beyond the
+   boundary of the CA are dead.
+
+4. Plot the state of the CA on each step.
+
+**Bonus**: Create an animation of the evolution of the Automaton.
+
+**Bonus**: Change the boundary condition. Options are: *hot* boundary
+  condition (all the cells outside are alive), periodic boundary
+  condition or a reflecting boundary condition.
+
+References: http://en.wikipedia.org/wiki/Cellular_automaton

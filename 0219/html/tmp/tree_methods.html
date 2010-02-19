@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tree methods for sumations &mdash; Taller Curso MSComp v0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Taller Curso MSComp v0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tmp/tree_methods.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tree-methods-for-sumations">
+<span id="tree-methods"></span><h1>Tree methods for sumations<a class="headerlink" href="#tree-methods-for-sumations" title="Permalink to this headline">¶</a></h1>
+<p>One of the most common numerical tasks in problems involving the
+simulation of dynamical processes in N-body systems is the computation
+of large number of summations with the form:</p>
+<div class="math">
+<p><img src="../_images/math/a8a6b8e5a997d4cbfd35cfecc91820266be5a612.png" alt="f_i = \sum_{j=1}^{j=N} g_{ij}" /></p>
+</div><p>One example is the computation of a long-range force exerted on a
+particle by the rest of particles in a given physical system.</p>
+<p>To compute the evolution of that kind of systems <img class="math" src="../_images/math/6de05613abfee2f5068c82eeb927eb0f7beb0568.png" alt="O(N^2)"/> computations
+of the <img class="math" src="../_images/math/30c428f767fb15a0d07910e81bcbbf449419345e.png" alt="g_{ij}"/> terms are required and with a large value of <img class="math" src="../_images/math/fc97ef67268cd4e91bacdf12b8901d7036c9a056.png" alt="N"/> the
+computational cost is huge.</p>
+<p>One of the most clever solution of this problem is the so-called
+<em>tree-method for summation</em>.  In that method the value of <img class="math" src="../_images/math/30c428f767fb15a0d07910e81bcbbf449419345e.png" alt="g_{ij}"/>
+corresponding to distant particles are summed up by constructing a
+hierarchical structure of nested cells (tree).</p>
+<p>The tree is constructed using the following procedure:</p>
+<ol class="arabic simple">
+<li>Divide the initial <em>volume</em> in <img class="math" src="../_images/math/cff49e9be17d37f6b0e32eff6a1c3e9ff7ee8c0c.png" alt="2^D"/> equal regions (<img class="math" src="../_images/math/56a368d7e62e0cb5641071e03961e2dfe720a52c.png" alt="D=1,2,3"/> is
+the number of space dimensions of the problem)</li>
+<li>Compute the physical properties of each cell: total mass or total
+charge, gravitational or electrical multipole momenta, etc.</li>
+<li>Store the geometrical paramters of each cell: center of mass or
+charge, dimensions, position of its vertices.</li>
+<li>Store a list of the particles contained on each cell.</li>
+<li>Tag the cell with an identification number.</li>
+<li>Store the tags of the father cell (0 for the original volume) and a
+list of the tags of the child cells if there is any (see next step).</li>
+<li>Repeat 1-6 for every child cell that contains more than 1 particle.</li>
+</ol>
+<p>The summation for each particle is performed in the following way:</p>
+<ol class="arabic simple">
+<li>Loop on the tree starting in the highest level (tag 1, 2, ... skip
+the 0 level)</li>
+<li>For each cell compute the distance from the centroid to the
+particle (d).</li>
+<li>If <img class="math" src="../_images/math/762907816be3898d39dfd67cc1b76dd6608f7628.png" alt="s/d&lt;0.5"/>, where <img class="math" src="../_images/math/f37bba504894945c07a32f5496d74299a37aa51c.png" alt="s"/> is the size of the cell compute the force
+exerted by the whole cell on the particle.</li>
+<li>Else descend on the child cells and repeat from step 2.</li>
+</ol>
+<p>At the end the computation of all the summations for the <img class="math" src="../_images/math/fc97ef67268cd4e91bacdf12b8901d7036c9a056.png" alt="N"/> particles
+is performed in <img class="math" src="../_images/math/14cc7c283fa63cd6a8aabf8bfaf197cfd1500eb2.png" alt="O(N log N)"/> instead of the original <img class="math" src="../_images/math/6de05613abfee2f5068c82eeb927eb0f7beb0568.png" alt="O(N^2)"/>.</p>
+<p>Write a python script to compute the gravitational force on each
+particle of a system composed by N randomly distributed particles in a
+1D line and using a tree-method to compute the summation.</p>
+<p>The specific gravitational force on particle i exerted by another
+particle is given by:</p>
+<div class="math">
+<p><img src="../_images/math/d7b26b7c28a72c7f3e27bbb0474e9228a70971bc.png" alt="f_i = -{M\over{R_i^3}} \vec{R}_i" /></p>
+</div><p>Where <img class="math" src="../_images/math/58c372eee9f28463a2cd7a1e9a488d69f8ae327d.png" alt="R_i = \vec r_i - \vec r"/>, <img class="math" src="../_images/math/5d1e4485dc90c450e8c76826516c1b2ccb8fce16.png" alt="M"/> and <img class="math" src="../_images/math/0b65be565783f279fc0eb5132fe95b63d93b342f.png" alt="\vec r"/> is the mass
+parameter and position of the other particle.</p>
+<dl class="docutils">
+<dt><strong>Bonus</strong>: Compare the time required to perform the operation using</dt>
+<dd>the direct summation and the tree mathod.</dd>
+</dl>
+<p><strong>Bonus</strong>: Write the program to perform the summation in 2 and 3D.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">Taller Curso MSComp v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Juan Carlos Cardona, Fernando Pérez, Diego Restrepo y Jorge Iván Zuluaga.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

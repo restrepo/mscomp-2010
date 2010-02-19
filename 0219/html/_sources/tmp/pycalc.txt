@@ -1,0 +1,35 @@
+.. Diego Restrepo
+
+.. _py_calc:
+
+Command line calculator
+=======================
+
+Make a python program that works as a command line calculator,
+``pycalc`` in the same spirit that the beloved UNIX program ``bc``.
+
+The program should work as in the following examples::
+
+    \$ pycalc "2*pi^2*sin(0.7)/atan(60)"
+    8.1822869377000984
+
+Note the use of ``^`` instead of ``**``.  The calculator should use by
+default the ``math`` library.  
+
+When dealing with complex numbers the python calculator should import
+the numpy library::
+
+    \$ pycalc -c "2*pi^2*asin(2+3j)/atan(60)"
+    (7.247930188215947+25.191239093226159j)
+
+where the ``-c`` options allows to work with complex numbers.
+
+**Bonus 1**: Deal with rationals and integers::
+
+    \$ pycalc 2/3+8/5
+    34/15
+
+**Bonus 2**: Input from pipes::
+
+    \$ echo 2./3+8/5. | pycalc
+    2.26666666667

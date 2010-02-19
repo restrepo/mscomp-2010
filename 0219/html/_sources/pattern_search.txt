@@ -1,0 +1,88 @@
+.. J Zuluaga
+
+.. _pattern_search:
+
+Sequence alignment 
+==================
+
+**Level**: Advanced (algorithm, language)
+
+Write a python Script to compute the global sequence alignment of two
+nucleotide sequences using a simple implementation of the Needleman-Wunsch
+algorithm.
+
+1. Generate two random sequences of a given length using letters in
+   the set $\{A,G,C,T\}$ (e.g. AGTGAC, TACGGA)
+   	   
+2. Construct a simple *similarity function* $S(A,B)$:
+
+   .. math::
+
+      S(A,B) = \left\{\begin{array}{cc} w_M & {\rm if}\;A = B \\ w_U & {\rm if}\;A \neq B\end{array}\right.
+      
+   Where $A$ and $B$ are any letters in the symbols set and $w_M=10$
+   $w_U=-5$ (gap scoring.)  This function is used to score the matches
+   between nucleotides in the sequences.
+
+3. Construct the *F-matrix* of the sequences, i.e. the matrix which
+   contains information about the matching of every single character
+   in both sequences:
+   
+   .. math::
+   
+      F_{ij} = \left\{
+      \begin{array}{cc} 
+      w_D & {\rm if}\;i = 0\;{\rm or}\;j=0 \\ 
+      max(F_{i-1,j-1}+S(A_i,B_j),F_{i,j-1}+w_D,F_{i-1,j}+w_D) & \rm{otherwise}
+      \end{array}\right.
+   
+   Where $A_i$ is the i-th letter in the sequence A and $w_D = -5$
+
+4. The F-matrix has the instructions to build the final alignment.
+   For the example sequences A=AGTGAC, B=TACGGA the F-matrix looks
+   like:
+   
+   .. math::
+
+    F = \left(
+    \begin{array}{cccccc}
+    -5&  -5&  -5&  -5&  -5&  -5\\
+    -5& -10& -10&   5&   5&   0\\
+    -5& -10& -15&   0&   0&   0\\
+    -5& -10& -15&  -5&  10&   5\\
+    -5&   5&   0&  -5&   5&  20\\
+    -5&   0&  15&  10&   5&  15
+    \end{array}
+    \right)
+
+   To build the aligned sequences $A',B'$, start in the lowermost,
+   rightmost component of the matrix.  Compare that element with their
+   neighbors: diagonal ($i-1,j-1$), left ($i,j-1$) and up ($i-1,j$).
+   Find the larger value among them and *move* in that direction.
+
+   If your last movement was in the diagonal direction, add to aligned
+   sequences the respective character in the original sequences.  
+
+   If you move up, add to the aligned sequence $A'$ the respective
+   character of $A$ and to $B'$ add a symbol '-' (insertion or
+   deletion symbol).
+
+   Finally if you move to left, add to the aligned sequence $B'$ the
+   respective character in $B$ and put a '-' symbol in $A'$.
+
+   Repeat this procedure until you reach the first line or column.
+   
+   With the sequences provided above the final aligned sequences are:
+
+      --GTGAC
+
+      TAG-GA-
+
+**Bonus**: Try to measure the aligning time of long sequences and to figure
+out the way as the time increases with the length of the sequences.
+
+**Bonus**: Try changing the values of the gap-scoring ($w$ parameters).
+
+A detailed but slightly different explanation of the algorithm could
+be found in the Wikipedia article: http://es.wikipedia.org/wiki/Algoritmo_Needleman-Wunsch.
+
