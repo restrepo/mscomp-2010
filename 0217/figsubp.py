@@ -2,29 +2,8 @@
 
 import matplotlib.pyplot as plt
 
-
-def share_axes(fig, nrows, ncols, to_share, idx, **subplot_kw):
-    """Turn on axis sharing for the given list of figure and axes.
-
-    XXX - rest of docstring missing, ran out of time for now."""
-    
-    # Valid indices for axes start at 1, since fig is at 0: 
-    indices = range(1, nrows*ncols+1)
-    # idx will be created first, manually, so remove from this list
-    indices.remove(idx)
-    # Must make axes as dict so we can point all others to shared one
-    axd = {}
-    axd[idx] = fig.add_subplot(nrows, ncols, idx, **subplot_kw)
-    # Pass necessary share kw
-    subplot_kw[to_share] = axd[idx]
-    for i in indices:
-        axd[i] = fig.add_subplot(nrows, ncols, i, **subplot_kw)
-    # Now, we need the returned axes to be an ordered list:
-    return [axd[i] for i in sorted(axd.keys())]
-
-
-def fig_subplot(subplots=(1,1), sharex=None, sharey=None, subplot_kw=None,
-                **fig_kw):
+def fig_subplot(nrows=1, ncols=1, sharex=False, sharey=False,
+                subplot_kw=None, **fig_kw):
     """Create a figure with a set of subplots already made.
 
     This utility wrapper makes it convenient to create common layouts of
@@ -32,23 +11,25 @@ def fig_subplot(subplots=(1,1), sharex=None, sharey=None, subplot_kw=None,
 
     Parameters
     ----------
-    subplots : 2-tuple, optional
-      Number of rows and columns of the subplot grid.  Defaults to (1,1).
+    nrows : int, optional
+      Number of rows of the subplot grid.  Defaults to 1.
 
-    sharex : int, optional
-      The index of which axis to share the X axis for. Note that axes are
-      created with a counter starting from 1.
+    nrows : int, optional
+      Number of columns of the subplot grid.  Defaults to 1.
 
-    sharey : int, optional
-      Like sharex, but for sharing the Y axis.  Note that currently, sharing
-      *both* X and Y axes is not supported via this routine.
-      
+    sharex : bool, optional
+      If True, the X axis will be shared amongst all subplots.
+
+    sharex : bool, optional
+      If True, the Y axis will be shared amongst all subplots.
+
     subplot_kw : dict, optional
       Dict with keywords passed to the add_subplot() call used to create each
       subplots.
 
     fig_kw : dict, optional
-      Dict with keywords passed to the figure() call.
+      Dict with keywords passed to the figure() call.  Note that all keywords
+      not recognized above will be automatically included here.
 
     Returns
     -------
@@ -58,73 +39,81 @@ def fig_subplot(subplots=(1,1), sharex=None, sharey=None, subplot_kw=None,
 
     Examples
     --------
-    x = np.linspace(0, 2*np.pi, 200)
+    x = np.linspace(0, 2*np.pi, 400)
     y = np.sin(x**2)
 
-    plt.close('all')
-
     # Just a figure and one subplot
-    f, ax = fig_subplot((1,1))
+    f, ax = fig_subplot()
     ax.plot(x, y)
     ax.set_title('Simple plot')
     
-    # Two subplots, grab the whole fig_axes list
-    fax = fig_subplot((2,1), sharex=1)
-    fax[1].plot(x, y)
-    fax[1].set_title('Shared X axes')
-    fax[2].scatter(x, y)
-
     # Two subplots, unpack the output immediately
-    f, ax1, ax2 = fig_subplot((1,2), sharey=1)
+    f, ax1, ax2 = fig_subplot(1, 2, sharey=True)
     ax1.plot(x, y)
-    ax1.set_title('Shared Y axes')
+    ax1.set_title('Sharing Y axis')
     ax2.scatter(x, y)
+
+    # Four polar axes
+    fig_subplot(2, 2, subplot_kw=dict(polar=True))
     """
 
-    # XXX I think this is doable, I just ran out of time now to implement it
-    if sharex and sharey:
-        raise NotImplementedError('both axes shared not implemented')
-    
     if subplot_kw is None:
         subplot_kw = {}
         
     fig = plt.figure(**fig_kw)
-    nrows, ncols = subplots
 
+    # Create first subplot separately, so we can share it if requested
+    ax1 = fig.add_subplot(nrows, ncols, 1, **subplot_kw)
     if sharex:
-        axes = share_axes(fig, nrows, ncols, 'sharex', sharex, **subplot_kw)
-    elif sharey:
-        axes = share_axes(fig, nrows, ncols, 'sharey', sharey, **subplot_kw)
-    else:
-        axes = [ fig.add_subplot(nrows, ncols, i, **subplot_kw)
-                 for i in range(1, nrows*ncols+1) ]
-    return [fig] + axes
+        subplot_kw['sharex'] = ax1
+    if sharey:
+        subplot_kw['sharey'] = ax1
+
+    # Valid indices for axes start at 1, since fig is at 0: 
+    axes = [ fig.add_subplot(nrows, ncols, i, **subplot_kw)
+             for i in range(2, nrows*ncols+1)]
+
+    return [fig, ax1] + axes
 
 
 if __name__ == '__main__':
     # Simple demo
     import numpy as np
     
-    x = np.linspace(0, 2*np.pi, 200)
+    x = np.linspace(0, 2*np.pi, 400)
     y = np.sin(x**2)
 
     plt.close('all')
 
     # Just a figure and one subplot
-    f, ax = fig_subplot((1,1))
+    f, ax = fig_subplot()
     ax.plot(x, y)
     ax.set_title('Simple plot')
     
     # Two subplots, grab the whole fig_axes list
-    fax = fig_subplot((2,1), sharex=1)
+    fax = fig_subplot(2, sharex=True)
     fax[1].plot(x, y)
-    fax[1].set_title('Shared X axes')
+    fax[1].set_title('Sharing X axis')
     fax[2].scatter(x, y)
 
     # Two subplots, unpack the output immediately
-    f, ax1, ax2 = fig_subplot((1,2), sharey=1)
+    f, ax1, ax2 = fig_subplot(1, 2, sharey=True)
     ax1.plot(x, y)
-    ax1.set_title('Shared Y axes')
+    ax1.set_title('Sharing Y axis')
     ax2.scatter(x, y)
+
+    # Three subplots sharing both x/y axes
+    f, ax1, ax2, ax3 = fig_subplot(3, sharex=True, sharey=True)
+    ax1.plot(x, y)
+    ax1.set_title('Sharing both axes')
+    ax2.scatter(x, y)
+    ax3.scatter(x, 2*y**2-1,color='r')
+    # Fine-tune figure; make subplots close to each other and hide x ticks for
+    # all but bottom plot.
+    f.subplots_adjust(hspace=0)
+    plt.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
+
+    # Four polar axes
+    fig_subplot(2, 2, subplot_kw=dict(polar=True))
 
     plt.show()
