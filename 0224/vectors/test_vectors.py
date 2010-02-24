@@ -37,7 +37,7 @@ def test_addition():
 def test_str():
     x = Vector(1, 2)
     xs = 'Vector(1, 2)'
-
+    nt.assert_equals(str(x), xs)
 
 def test_len():
     x = Vector(1, 2)

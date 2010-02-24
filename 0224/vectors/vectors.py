@@ -1,8 +1,11 @@
 """Simple vector implementation."""
 
 class Vector(object):
+    #: esto es tal cosa...
+    comun = 1
     def __init__(self, *components):
         """Initialize a vector."""
+        print "initializing vector"
         if len(components)==1:
             # If we are given a single sequence, try to make it into a tuple to
             # support initialization with regular sequences.
@@ -22,6 +25,7 @@ class Vector(object):
     __repr__ = __str__
 
     def __len__(self):
+        self.longitud = 10
         return len(self.components)
 
     def __add__(self, other):
