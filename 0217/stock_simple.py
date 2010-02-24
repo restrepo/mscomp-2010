@@ -61,8 +61,8 @@ ax2.grid(True)
 ax1.scatter(s.date[mask], s.adj_close[mask], color='r',zorder=10)
 
 # Fine-tune figure:
-# Make subplots close to each other (do not use hspace exactly zero!)
-fig.subplots_adjust(hspace=0.0001)
+# Make subplots close to each other
+fig.subplots_adjust(hspace=0)
 # Hide ax1 x ticks
 plt.setp(ax1.get_xticklabels(), visible=False)
 # orient dates nicely
