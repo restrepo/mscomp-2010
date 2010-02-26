@@ -39,9 +39,7 @@ export PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
 pfx="$pfx $HOME/tmp/junk"  # quick and dirty testing
 pfx="$pfx $HOME/tmp/local"  # temporary, stable testing
 pfx="$pfx $HOME/usr"  # codes *I* have written
-pfx="$pfx $HOME/usr/opt"  # I don't sync this across computers
 pfx="$pfx $HOME/usr/local"  # default prefix for third-party installs
-pfx="$pfx $HOME/usr/boost"  # isolate boost
 pfx="$pfx /local"  # used in some machines I work on
 pfx="$pfx /opt"  # vendor directory for commercial stuff
 
@@ -51,16 +49,11 @@ pfx="$pfx /opt"  # vendor directory for commercial stuff
 export_paths "$pfx"
 
 # Default prefix for personal installs I use.
-#export PREFIX=$HOME/usr/local
-export PREFIX=$HOME/usr/opt
+export PREFIX=$HOME/usr/local
 
 # This is the name CMAKE uses for the same thing
 export CMAKE_INSTALL_PREFIX=$PREFIX
 
-# Make 2.5-2.6 specific ones, so it's easy to switch with a simple alias
-PYTHONPATH25=`mk_pythonpath "$pfx" 2.5`
-PYTHONPATH26=`mk_pythonpath "$pfx" 2.6`
-PYTHONPATH31=`mk_pythonpath "$pfx" 3.1`
 
 # Search paths for LaTeX (Dont' forget the final colons.  The null entry `::'
 # denotes `default system directories' -- try finding that in the
