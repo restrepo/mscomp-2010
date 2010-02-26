@@ -1,0 +1,68 @@
+#!/bin/sh
+# Usage:
+#   makepkg PACKAGE [REVISION]
+#
+# If revision is not given, an update to SVN or BZR HEAD is made.
+
+############################################################################
+# Configure here:
+
+# Version of python and prefix you want to use.  This MUST be of the form
+# 'pythonX.Y' (where X.Y means Major.Minor version numbers) since that is the
+# form used by Python in constructing paths once --prefix is specified for
+# distutils-based installation.
+PYTHON_DEFAULT=python2.6
+
+# The PYPREFIX can be declared as an environment variable or passed in by the
+# Makefile, this sets the default value otherwise:
+
+#PYPREFIX_DEFAULT=$HOME/usr/opt
+PYPREFIX_DEFAULT=$HOME/usr/local
+
+############################################################################
+#
+# Don't touch anything below here unless you know what you're doing
+#
+PACKAGE=$1
+REVISION=$2
+
+# Set prefixes and other variables
+PYPREFIX=${PYPREFIX-${PYPREFIX_DEFAULT}}
+PYTHON=${PYTHON-${PYTHON_DEFAULT}}
+
+# Set python search path correctly
+export PYTHONPATH=${PYPREFIX}/lib/${PYTHON}/site-packages:${PYTHONPATH}:
+
+# Select version control system to call for updates
+if [ -e $PACKAGE/.svn ]; then
+   VCS=svn
+else
+   VCS=bzr
+fi
+
+# Set revision argument for VCS update
+if [ "$REVISION" != "" ]; then
+    REV="-r $REVISION"
+fi
+
+
+# debug info
+#echo "vcs: $VCS"
+#exit 1
+#echo "prefix: $PYPREFIX"
+#exit 1
+
+# Call VCS update before building
+$VCS update $REV $PACKAGE
+
+# remove existing ${PACKAGE} to make sure the build doesn't pick up spurious
+# things
+rm -rf $PYPREFIX/lib/${PYTHON}/site-packages/${PACKAGE}
+rm -rf $PYPREFIX/lib/${PYTHON}/site-packages/${PACKAGE}*.egg
+rm -rf $PYPREFIX/lib/${PYTHON}/site-packages/${PACKAGE}*.egg-info
+
+# make/install
+cd ${PACKAGE}
+rm -rf build
+$PYTHON setup.py clean
+time $PYTHON setup.py install --prefix=$PYPREFIX
