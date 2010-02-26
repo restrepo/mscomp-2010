@@ -1,0 +1,40 @@
+9
+
+dir
+7978
+https://matplotlib.svn.sourceforge.net/svnroot/matplotlib/trunk/py4science/examples/numpy_wrap/f2py/example2
+https://matplotlib.svn.sourceforge.net/svnroot/matplotlib
+
+
+
+2007-12-06T21:51:12.012852Z
+4657
+jdh2358
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f61c4167-ca0d-0410-bb4a-bb21726e55ed
+
+fib2.f
+file
+
+
+
+
+2007-04-07T18:24:18.000000Z
+b3e8791f7afb7c944acd5625da51fa3b
+2007-12-06T21:51:12.012852Z
+4657
+jdh2358
+

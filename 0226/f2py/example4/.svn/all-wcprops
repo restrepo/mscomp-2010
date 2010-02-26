@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4
+END
+test_simple.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/test_simple.py
+END
+simple.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/simple.f90
+END
+simple.pyf
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/simple.pyf
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/setup.py
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/README.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/Makefile
+END
+setup.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/matplotlib/!svn/ver/5792/trunk/py4science/examples/numpy_wrap/f2py/example4/setup.cfg
+END

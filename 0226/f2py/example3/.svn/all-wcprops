@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/matplotlib/!svn/ver/6271/trunk/py4science/examples/numpy_wrap/f2py/example3
+END
+test_example.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/matplotlib/!svn/ver/6271/trunk/py4science/examples/numpy_wrap/f2py/example3/test_example.py
+END
+test.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example3/test.py
+END
+test_fib.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/matplotlib/!svn/ver/6271/trunk/py4science/examples/numpy_wrap/f2py/example3/test_fib.py
+END
+fib.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example3/fib.py
+END
+fib3.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example3/fib3.f
+END
+Laurence Tratt on Fibonacci.html
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example3/Laurence%20Tratt%20on%20Fibonacci.html
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/matplotlib/!svn/ver/5713/trunk/py4science/examples/numpy_wrap/f2py/example3/Makefile
+END

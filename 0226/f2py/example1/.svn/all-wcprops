@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example1
+END
+fib.f
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example1/fib.f
+END
+fib.pyf.new
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example1/fib.pyf.new
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example1/Makefile
+END
+fib.pyf
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/matplotlib/!svn/ver/4657/trunk/py4science/examples/numpy_wrap/f2py/example1/fib.pyf
+END
