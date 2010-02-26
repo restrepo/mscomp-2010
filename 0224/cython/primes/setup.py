@@ -14,6 +14,6 @@ ext_modules=[ Extension("sprimes.primes", ["sprimes/primes.pyx"]),
 setup(
   name        = 'Simple Primes Cython Demo',
   cmdclass    = {'build_ext': build_ext},
-  packages    = ['sprimes'],
+  packages    = ['sprimes','sprimes.test'],
   ext_modules = ext_modules,
 )
